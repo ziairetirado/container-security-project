@@ -4,6 +4,12 @@ A hands-on project covering the container security lifecycle: understanding
 what a container actually is, building a hardened image, scanning it for
 known vulnerabilities, and locking down how it runs in Kubernetes.
 
+## Architecture
+
+<img width="1408" height="768" alt="Aws Container Security Architecture" src="https://github.com/user-attachments/assets/c5a52c7c-d4bb-4195-ae36-eb5a3e7d28be" />
+
+
+
 ## 1. Containers & Docker basics
 
 A container is **not** a lightweight VM — it's a normal Linux process that
