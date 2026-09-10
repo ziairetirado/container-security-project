@@ -1,0 +1,12 @@
+# Default-deny baseline: no pod in the demo namespace can send or receive
+# traffic unless a more specific NetworkPolicy explicitly allows it.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: demo
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress

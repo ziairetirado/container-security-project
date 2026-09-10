@@ -1,0 +1,36 @@
+# Punch a narrow hole in the default-deny baseline: only pods labeled
+# role=frontend may reach demo-app on port 8080, and demo-app may only
+# reach DNS + pods labeled role=database on port 5432.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-demo-app
+  namespace: demo
+spec:
+  podSelector:
+    matchLabels:
+      app: demo-app
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              role: frontend
+      ports:
+        - protocol: TCP
+          port: 8080
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              role: database
+      ports:
+        - protocol: TCP
+          port: 5432
+    - to:
+        - namespaceSelector: {}
+      ports:
+        - protocol: UDP
+          port: 53
