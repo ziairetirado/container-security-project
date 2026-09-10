@@ -1,0 +1,11 @@
+# Least-privilege Role: this app's ServiceAccount can only read its own pods
+# and configmaps in the demo namespace — nothing cluster-wide, no writes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: demo-app-reader
+  namespace: demo
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "configmaps"]
+    verbs: ["get", "list", "watch"]
